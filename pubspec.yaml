@@ -16,15 +16,40 @@ dependencies:
   get: 4.6.6
   flutter: 
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   geolocator: ^11.1.0
   geocoding: ^3.0.0
   lottie: ^3.1.2
-
+  intl: ^0.18.1
+  percent_indicator: ^4.2.3
+  flutter_date_pickers: ^0.4.3
+  flash: ^3.1.1
+  flutter_image_compress: ^2.3.0
+  file_picker: ^8.0.0+1
+  slide_digital_clock: ^1.0.2
+  widget_zoom: ^0.0.4
+  url_launcher: ^6.3.0
+  firebase_core: 2.24.2 
+  firebase_messaging: ^14.7.9
+  flutter_local_notifications: ^16.2.0
+  
+  
 dev_dependencies: 
   flutter_lints: ^3.0.0
   flutter_test: 
     sdk: flutter
 
-flutter: 
+flutter:
+  generate: true
+  assets:
+    - assets/lottie/
+    - assets/images/
   uses-material-design: true
-
+  
+  fonts:
+    - family: OpenSans
+      fonts:
+        - asset: assets/fonts/OpenSans-Regular.ttf
+        - asset: assets/fonts/OpenSans-Italic.ttf
+          style: italic

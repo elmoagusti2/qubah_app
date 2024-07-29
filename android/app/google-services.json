@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "445254866282",
+    "project_id": "qubah-6f71c",
+    "storage_bucket": "qubah-6f71c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:445254866282:android:d7db3af0d16736b9abc113",
+        "android_client_info": {
+          "package_name": "com.example.qubah_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAasgTXhkIEaS4IC1RzV-cqdJe-OoEdwtQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
