@@ -1,5 +1,5 @@
 {
-    "languange": "Languange",
+    "languange": "Language",
     "login": "Login",   
     "profile": "Profile",
     "myData" : "My Data",
@@ -14,7 +14,7 @@
     "education":"Education",
     "changePassword":"Change Password",
     "logout":"Log out",
-    "chooseLanguange": "Choose your languange",
+    "chooseLanguange": "Choose your language",
     "inbox": "Inbox",
     "notification": "Notification",
     "emptyNotification": "Empty Notification",
