@@ -120,14 +120,13 @@ class _SubmissionFormViewState extends State<SubmissionFormView> {
                               ),
                             ),
                             if (controller.isDocument.value == '1')
-                              Column(
+                              Row(
                                 children: [
-                                  const SizedBox(height: 10),
                                   SizedBox(
                                     width: 130,
                                     child: AppButton.generalWithWidget(
                                         onTap: () =>
-                                            controller.doPickDocument(),
+                                            controller.doPickDocument(false),
                                         widget: Row(
                                           mainAxisSize: MainAxisSize.min,
                                           mainAxisAlignment:
@@ -137,6 +136,25 @@ class _SubmissionFormViewState extends State<SubmissionFormView> {
                                             const SizedBox(width: 4),
                                             AppText.textWidgetBold12(
                                               text: strings.addDocument,
+                                            ),
+                                          ],
+                                        )),
+                                  ),
+                                  const SizedBox(width: 10),
+                                  SizedBox(
+                                    width: 130,
+                                    child: AppButton.generalWithWidget(
+                                        onTap: () =>
+                                            controller.doPickDocument(true),
+                                        widget: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            const Icon(Icons.note_add),
+                                            const SizedBox(width: 4),
+                                            AppText.textWidgetBold12(
+                                              text: strings.addPhoto,
                                             ),
                                           ],
                                         )),

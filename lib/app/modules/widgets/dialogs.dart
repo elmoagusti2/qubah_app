@@ -211,7 +211,8 @@ class Dialogs {
     );
   }
 
-  static changeLanguange({required BuildContext context}) {
+  static changeLanguange(
+      {required BuildContext context, required Function function}) {
     final getStorage = GetStorage();
     final strings = AppLocalizations.of(context)!;
     return showDialog<void>(
@@ -234,6 +235,7 @@ class Dialogs {
                   selected = 'id';
                   getStorage.write('lang', 'id').then(
                       (value) => MyApp.setLocale(context, const Locale('id')));
+                  function('id');
                   Get.back();
                 },
                 title: const Text('ID - Indonesia'),
@@ -249,6 +251,7 @@ class Dialogs {
                   selected = 'en';
                   getStorage.write('lang', 'en').then(
                       (value) => MyApp.setLocale(context, const Locale('en')));
+                  function('en');
                   Get.back();
                 },
                 title: const Text('EN - English'),

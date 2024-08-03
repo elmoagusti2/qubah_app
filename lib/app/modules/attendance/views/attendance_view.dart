@@ -91,7 +91,7 @@ class AttendanceView extends GetView<AttendanceController> {
                                       children: [
                                         AppText.textWidgetBold14(
                                             text: strings.listOfAttendance),
-                                       ],
+                                      ],
                                     ),
                                     const Spacer(),
                                     IconButton(
@@ -233,11 +233,12 @@ class ListAttendanceCard extends StatelessWidget {
                 AppText.textWidgetBold12(
                     text: !CommonUtil.falsyChecker(item.checkIn)
                         ? item.checkIn!
-                        : '-',
+                        : 'X',
                     color: Colors.grey[800]),
                 AppText.textWidget12(
                     textAlign: TextAlign.center,
                     text: strings.clockIn,
+                    maxLines: 1,
                     color: Colors.grey[600])
               ],
             ),
@@ -255,11 +256,12 @@ class ListAttendanceCard extends StatelessWidget {
                 AppText.textWidgetBold12(
                     text: !CommonUtil.falsyChecker(item.checkOut)
                         ? item.checkOut!
-                        : '-',
+                        : 'X',
                     color: Colors.grey[800]),
                 AppText.textWidget12(
                     textAlign: TextAlign.center,
                     text: strings.clockOut,
+                    maxLines: 1,
                     color: Colors.grey[600])
               ],
             ),
@@ -277,11 +279,12 @@ class ListAttendanceCard extends StatelessWidget {
                 AppText.textWidgetBold12(
                     text: !CommonUtil.falsyChecker(item.totalHours)
                         ? item.totalHours!
-                        : '-',
+                        : 'X',
                     color: Colors.grey[800]),
                 AppText.textWidget12(
                     textAlign: TextAlign.center,
                     text: strings.totalHrs,
+                    maxLines: 1,
                     color: Colors.grey[600])
               ],
             ),

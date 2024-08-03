@@ -4,6 +4,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_date_pickers/flutter_date_pickers.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:qubah_app/app/common/common_utils.dart';
 import 'package:qubah_app/app/common/enum.dart';
 import 'package:qubah_app/app/common/format_date.dart';
@@ -37,14 +38,20 @@ class SubmissionFormController extends GetxController {
     selectedPeriod.value = newPeriod;
   }
 
-  doPickDocument() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles();
-
-    if (result != null) {
-      File file = File(result.files.single.path!);
-      filePick.value = file;
+  doPickDocument(isImage) async {
+    if (isImage) {
+      final XFile? result =
+          await ImagePicker().pickImage(source: ImageSource.camera);
+      if (result != null) {
+        File file = File(result.path);
+        filePick.value = file;
+      } else {}
     } else {
-      // User canceled the picker
+      FilePickerResult? result = await FilePicker.platform.pickFiles();
+      if (result != null) {
+        File file = File(result.files.single.path!);
+        filePick.value = file;
+      } else {}
     }
   }
 

@@ -27,7 +27,9 @@ class ProfileView extends GetView<ProfileController> {
                 text: strings.profile, color: AppColors.main),
             actions: [
               IconButton(
-                  onPressed: () => Dialogs.changeLanguange(context: context),
+                  onPressed: () => Dialogs.changeLanguange(
+                      context: context,
+                      function: (val) => controller.doChangeLanguage(val)),
                   icon: const Icon(Icons.language, color: AppColors.main)),
               IconButton(
                   onPressed: () {
