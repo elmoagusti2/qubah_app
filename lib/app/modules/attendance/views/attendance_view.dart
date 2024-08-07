@@ -226,14 +226,19 @@ class ListAttendanceCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(
-                  Icons.update,
-                  color: AppColors.greenSubmission,
-                ),
+                !CommonUtil.falsyChecker(item.checkIn)
+                    ? const Icon(
+                        Icons.update,
+                        color: AppColors.greenSubmission,
+                      )
+                    : const Icon(
+                        Icons.cancel,
+                        color: AppColors.red20,
+                      ),
                 AppText.textWidgetBold12(
                     text: !CommonUtil.falsyChecker(item.checkIn)
                         ? item.checkIn!
-                        : 'X',
+                        : '-',
                     color: Colors.grey[800]),
                 AppText.textWidget12(
                     textAlign: TextAlign.center,
@@ -249,14 +254,19 @@ class ListAttendanceCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(
-                  Icons.update,
-                  color: AppColors.orangeSubmission,
-                ),
+                !CommonUtil.falsyChecker(item.checkOut)
+                    ? const Icon(
+                        Icons.update,
+                        color: AppColors.orangeSubmission,
+                      )
+                    : const Icon(
+                        Icons.cancel,
+                        color: AppColors.red20,
+                      ),
                 AppText.textWidgetBold12(
                     text: !CommonUtil.falsyChecker(item.checkOut)
                         ? item.checkOut!
-                        : 'X',
+                        : '-',
                     color: Colors.grey[800]),
                 AppText.textWidget12(
                     textAlign: TextAlign.center,
@@ -272,14 +282,19 @@ class ListAttendanceCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(
-                  Icons.check_circle,
-                  color: AppColors.blueAccent,
-                ),
+                !CommonUtil.falsyChecker(item.totalHours)
+                    ? const Icon(
+                        Icons.check_circle,
+                        color: AppColors.blueAccent,
+                      )
+                    : const Icon(
+                        Icons.cancel,
+                        color: AppColors.red20,
+                      ),
                 AppText.textWidgetBold12(
                     text: !CommonUtil.falsyChecker(item.totalHours)
                         ? item.totalHours!
-                        : 'X',
+                        : '-',
                     color: Colors.grey[800]),
                 AppText.textWidget12(
                     textAlign: TextAlign.center,

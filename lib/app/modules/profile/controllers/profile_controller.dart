@@ -1,8 +1,6 @@
 import 'package:get/get.dart';
 import 'package:qubah_app/app/controllers/authenticate_controller.dart';
 import 'package:qubah_app/app/models/configuration/employee.dart';
-
-import '../../../common/common_utils.dart';
 import '../../../domain/repositories/api_client.dart';
 import '../../widgets/alert.dart';
 
@@ -12,13 +10,13 @@ class ProfileController extends GetxController {
       Get.find<AuthenticateController>().configuration.employee;
   doChangeLanguage(lang) async {
     final (ResponseStatus status, response) =
-        await apiClient.post(url: 'language', data: {
-      "lang": lang,
+        await apiClient.post(url: 'update-language', data: {
+      "language_id": lang,
     });
     if (status == ResponseStatus.success) {
-      if (response['status'] && !CommonUtil.falsyChecker(response['data'])) {
+      if (response['status']) {
         AppAlert.success(
-            context: Get.context!, message: 'Success change language');
+            context: Get.context!, message: 'Success chane language');
       } else {
         AppAlert.error(
             context: Get.context!,

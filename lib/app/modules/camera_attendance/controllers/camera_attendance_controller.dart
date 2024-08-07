@@ -136,7 +136,7 @@ class CameraAttendanceController extends GetxController {
           Get.back();
           AppAlert.success(
               context: Get.context!,
-              message: res['message'] ?? 'Successfully approve');
+              message: res['message'] ?? 'Successfully attendance');
         } else {
           Get.back();
           AppAlert.error(

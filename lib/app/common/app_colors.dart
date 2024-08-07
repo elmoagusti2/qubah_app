@@ -10,6 +10,7 @@ class AppColors {
   static const blue20 = Color(0xFFe7eff2);
   static const blueAccent = Color(0XFF1cbec9);
   static const red10 = Color(0xFFffeceb);
+  static const red20 = Color(0xFFFA7070);
   static const orange10 = Color(0xFFfef5e6);
   static const orangeSubmission = Color(0xFFfe9504);
   static const grey10 = Color(0xFFfaf7f7);

@@ -65,7 +65,8 @@ class _SubmissionFormViewState extends State<SubmissionFormView> {
                                           e.isPicture!;
                                     },
                                     child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
+                                      padding:
+                                          const EdgeInsets.only(right: 8.0),
                                       child: Chip(
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 20, vertical: 10),
