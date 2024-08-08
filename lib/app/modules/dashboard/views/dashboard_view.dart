@@ -1,4 +1,3 @@
-import 'package:clock_widget/clock_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:qubah_app/app/common/app_colors.dart';
@@ -9,7 +8,7 @@ import 'package:qubah_app/app/modules/home/controllers/home_controller.dart';
 import 'package:qubah_app/app/modules/widgets/card_attendance.dart';
 import 'package:qubah_app/app/routes/app_pages.dart';
 import 'package:shimmer/shimmer.dart';
-// import 'package:slide_digital_clock/slide_digital_clock.dart';
+import 'package:slide_digital_clock/slide_digital_clock.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../controllers/dashboard_controller.dart';
 
@@ -91,10 +90,31 @@ class DashboardView extends GetView<DashboardController> {
                               ),
                               child: Column(
                                 children: [
-                                  const ClockWidget(
-                                    clockType: ClockType.digital,
-                                    bgColor: Colors.white,
-                                  ),
+                                  SizedBox(
+                                      height: 75,
+                                      child: DigitalClock(
+                                        areaDecoration: const BoxDecoration(
+                                            color: Colors.transparent),
+                                        colon: const Text(':',
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold,
+                                                color: AppColors.main)),
+                                        areaAligment:
+                                            AlignmentDirectional.center,
+                                        minuteDigitDecoration:
+                                            const BoxDecoration(
+                                                color: Colors.transparent),
+                                        hourMinuteDigitTextStyle:
+                                            const TextStyle(
+                                                fontSize: 30,
+                                                fontWeight: FontWeight.bold,
+                                                color: AppColors.main),
+                                        secondDigitTextStyle: const TextStyle(
+                                            fontSize: 30,
+                                            fontWeight: FontWeight.bold,
+                                            color: AppColors.main),
+                                      )),
                                   AppText.textWidgetBold12(
                                       text: AppFormatDate()
                                           .MMMMDDYYYY_EEEE(DateTime.now()),
