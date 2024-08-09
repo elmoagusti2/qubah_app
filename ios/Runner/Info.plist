@@ -7,6 +7,8 @@
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>We need access to your photo library to choose photos.</string>
 	<key>CFBundleDevelopmentRegion</key>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Why is my app authenticating using face id?</string>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
 	<string>Qubah App</string>

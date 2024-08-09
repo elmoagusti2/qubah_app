@@ -1,8 +1,12 @@
 import 'package:camera/camera.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:google_mlkit_face_detection/google_mlkit_face_detection.dart';
+import 'package:local_auth/local_auth.dart';
 import 'package:qubah_app/app/common/common_utils.dart';
 import 'package:qubah_app/app/common/enum.dart';
 import 'package:qubah_app/app/domain/repositories/api_client.dart';
@@ -11,6 +15,7 @@ import 'package:qubah_app/app/modules/widgets/alert.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:dio/dio.dart' as d;
 import 'package:qubah_app/app/modules/widgets/dialogs.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CameraAttendanceController extends GetxController {
   final ApiClient apiClient = ApiClient();
@@ -21,6 +26,15 @@ class CameraAttendanceController extends GetxController {
   XFile? image;
   final isTakePhoto = false.obs;
   String statusId = Get.arguments;
+  final FaceDetector _faceDetector = FaceDetector(
+    options: FaceDetectorOptions(
+      enableContours: true,
+      enableLandmarks: true,
+      performanceMode: FaceDetectorMode.accurate,
+    ),
+  );
+  final strings = AppLocalizations.of(Get.context!)!;
+  final _localAuth = LocalAuthentication();
 
   @override
   void onInit() async {
@@ -153,6 +167,48 @@ class CameraAttendanceController extends GetxController {
     } else {
       Get.back();
       AppAlert.error(context: Get.context!, message: 'Please fill field');
+    }
+  }
+
+  doCheckRequirement() async {
+    Future.delayed(Duration.zero, () => Dialogs.loading(context: Get.context!));
+    if (CommonUtil.falsyChecker(image?.path)) {
+      await Future.delayed(const Duration(seconds: 1), () => Get.back());
+      AppAlert.error(context: Get.context!, message: strings.takeImage);
+    } else if (CommonUtil.falsyChecker(position?.latitude) &&
+            CommonUtil.falsyChecker(addressDetail.value) ||
+        address.text.isEmpty) {
+      await Future.delayed(const Duration(seconds: 1), () => Get.back());
+      AppAlert.error(context: Get.context!, message: strings.addressNotFound);
+    } else {
+      final inputImage = InputImage.fromFilePath(image!.path);
+      final faces = await _faceDetector.processImage(inputImage);
+      Get.back();
+      faces.isNotEmpty
+          ? doCheckFingerBiometric()
+          : AppAlert.error(
+              context: Get.context!, message: strings.pleaseTakeface);
+    }
+  }
+
+  doCheckFingerBiometric() async {
+    try {
+      final isUserAuthenticated = await _localAuth.authenticate(
+          localizedReason: 'Authenticate Yourself',
+          options: const AuthenticationOptions(
+            useErrorDialogs: true,
+            stickyAuth: true,
+            biometricOnly: true,
+          ));
+      if (isUserAuthenticated) {
+        doSubmit();
+      } else {}
+    } on PlatformException catch (e) {
+      //if device not support
+      if (kDebugMode) {
+        print('$e');
+      }
+      doSubmit();
     }
   }
 }

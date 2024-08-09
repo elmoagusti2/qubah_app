@@ -241,12 +241,7 @@ class _CameraAttendanceViewState extends State<CameraAttendanceView>
       alignment: Alignment.bottomRight,
       child: InkWell(
         onTap: () async {
-          await controller.doSubmit();
-          // Get.back();
-          // AppAlert.success(context: context, message: 'Attendance Success');
-          // final dash = Get.find<DashboardController>();
-          // dash.clockOut.value = '23:59';
-          // dash.update();
+          await controller.doCheckRequirement();
         },
         child: const Padding(
           padding: EdgeInsets.all(8.0),
@@ -270,12 +265,7 @@ class _CameraAttendanceViewState extends State<CameraAttendanceView>
           controller.isTakePhoto.value = false;
           cameraController!.resumePreview();
         },
-        onLongPress: () {
-          // controller.faceRecog.deleFaceRecog();
-          // Get.back();
-          // Dialogs.succesMessage(
-          //     context: context, message: strings.successDeleteFace);
-        },
+        onLongPress: () {},
         child: const Padding(
           padding: EdgeInsets.all(8.0),
           child: Stack(
