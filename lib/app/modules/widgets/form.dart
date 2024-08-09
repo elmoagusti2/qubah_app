@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:qubah_app/app/common/app_colors.dart';
 import 'package:qubah_app/app/common/common_utils.dart';
+import 'package:qubah_app/app/common/text_style.dart';
 
 class Forms {
   static general({
@@ -101,7 +102,7 @@ class Forms {
         ],
       );
   static generalWithOntap({
-    required String title,
+    String? title,
     required Function onTap,
     TextEditingController? controller,
     TextInputType? keyboardType,
@@ -111,13 +112,15 @@ class Forms {
     IconData? suffixIcon,
     Color? color,
     Color? textColor,
+    Color? titleColor,
   }) =>
       Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title,
-              style: const TextStyle(color: AppColors.main, fontSize: 16)),
+          if (!CommonUtil.falsyChecker(title))
+            AppText.textWidget14(
+                text: title ?? '', color: titleColor ?? AppColors.main),
           const SizedBox(height: 2),
           TextFormField(
             onTap: () => onTap(),
@@ -133,7 +136,7 @@ class Forms {
                   borderRadius: BorderRadius.circular(10)),
               fillColor: color ?? AppColors.grey10,
               contentPadding: const EdgeInsets.only(left: 8),
-              hintText: hint ?? title,
+              hintText: hint ?? '',
               suffixIcon: Icon(suffixIcon),
             ),
             style: TextStyle(color: textColor ?? Colors.black),

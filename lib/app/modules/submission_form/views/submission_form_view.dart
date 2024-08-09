@@ -87,6 +87,31 @@ class _SubmissionFormViewState extends State<SubmissionFormView> {
                                   ),
                               ],
                             ),
+                            if (controller.code.value == 'ST05')
+                              Column(children: [
+                                const SizedBox(height: 20),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Forms.generalWithOntap(
+                                          controller: controller.startTime,
+                                          textColor: Colors.grey,
+                                          title: strings.startClock,
+                                          onTap: () =>
+                                              controller.chooseTime(0)),
+                                    ),
+                                    const SizedBox(width: 8),
+                                    Expanded(
+                                      child: Forms.generalWithOntap(
+                                          textColor: Colors.grey,
+                                          controller: controller.endTime,
+                                          title: strings.endClock,
+                                          onTap: () =>
+                                              controller.chooseTime(1)),
+                                    ),
+                                  ],
+                                )
+                              ]),
                             const SizedBox(height: 20),
                             Row(
                               children: [

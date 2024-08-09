@@ -1,10 +1,11 @@
 import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_date_pickers/flutter_date_pickers.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:qubah_app/app/common/app_colors.dart';
 import 'package:qubah_app/app/common/common_utils.dart';
 import 'package:qubah_app/app/common/enum.dart';
 import 'package:qubah_app/app/common/format_date.dart';
@@ -28,6 +29,8 @@ class SubmissionFormController extends GetxController {
   final endDate = DateTime.now().add(const Duration(days: 345));
   final filePick = File('').obs;
   final isDocument = '0'.obs;
+  TextEditingController startTime = TextEditingController();
+  TextEditingController endTime = TextEditingController();
   @override
   void onInit() {
     doGetSubmissionType();
@@ -76,6 +79,8 @@ class SubmissionFormController extends GetxController {
       d.FormData formData = d.FormData.fromMap({
         if (!CommonUtil.falsyChecker(filePick.value.path))
           "picture": await d.MultipartFile.fromFile(filePick.value.path),
+        if (startTime.text.isNotEmpty) "start_time": startTime.text,
+        if (endTime.text.isNotEmpty) "end_time": endTime.text,
         "submission_type_id": code.value,
         "start_date": appFormatDate.yyyymmdd(selectedPeriod.value.start),
         "end_date": appFormatDate.yyyymmdd(selectedPeriod.value.end),
@@ -101,6 +106,36 @@ class SubmissionFormController extends GetxController {
     } else {
       AppAlert.error(context: Get.context!, message: 'Please fill form');
       requestSSubmission.value = RequestState.error;
+    }
+  }
+
+  chooseTime(int status) async {
+    final TimeOfDay? pick = await showTimePicker(
+      context: Get.context!,
+      initialTime: TimeOfDay.now().replacing(minute: 0),
+      initialEntryMode: TimePickerEntryMode.input,
+      builder: (context, child) {
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
+          child: Theme(
+            data: ThemeData.light().copyWith(
+                colorScheme: const ColorScheme.light(
+                  primary: AppColors.main,
+                  onSurface: Colors.black,
+                ),
+                timePickerTheme:
+                    const TimePickerThemeData(backgroundColor: Colors.white)),
+            child: child!,
+          ),
+        );
+      },
+    );
+    if (!CommonUtil.falsyChecker(pick)) {
+      status == 0
+          ? startTime.text =
+              '${pick?.hour}:${pick?.minute.toString().padLeft(2, '0')}:00'
+          : endTime.text =
+              '${pick?.hour}:${pick?.minute.toString().padLeft(2, '0')}:00';
     }
   }
 }
